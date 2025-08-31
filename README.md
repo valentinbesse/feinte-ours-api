@@ -8,9 +8,22 @@ L’objectif est de gérer les adhérents, les bénévoles, les formations, les 
 ## 🚀 Technologies utilisées
 
 - [Python 3.10+](https://www.python.org/)
-- [Django](https://www.djangoproject.com/)
-- [Django REST Framework](https://www.django-rest-framework.org/)
-- SQLite (par défaut pour dev)
+- [Django](https://www.djangoproject.com/) – Framework web principal
+- [Django REST Framework](https://www.django-rest-framework.org/) – Création d’API RESTful
+- [MongoDB](https://www.mongodb.com/) – Base de données NoSQL
+- [Djongo](https://www.djongomapper.com/) – Connecteur Django ↔ MongoDB
+- [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) – Conteneurisation et orchestration
+
+---
+
+## 🤔 Pourquoi ces choix ?
+
+- **Python & Django** : un écosystème mature et robuste, idéal pour un développement rapide et maintenable, en cohérence avec les pratiques de **Software Craftsmanship**.  
+- **Django REST Framework** : une solution éprouvée pour concevoir des API RESTful lisibles, documentées et testables.  
+- **MongoDB (NoSQL)** : apporte la flexibilité nécessaire pour modéliser des données hétérogènes (adhérents, bénévoles, rôles, droits) sans rigidité relationnelle.  
+- **Djongo** : permet d’utiliser MongoDB avec l’ORM Django, ce qui conserve les bonnes pratiques Django tout en profitant du NoSQL.  
+- **Docker & Compose** : garantissent une reproductibilité de l’environnement (base de données, services) et facilitent le déploiement.  
+- **TDD & BDD** : l’approche de développement guidée par les tests et par le métier assure un code fiable, simple et aligné avec les besoins réels de l’association.
 
 ---
 
