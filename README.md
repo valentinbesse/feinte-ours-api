@@ -58,6 +58,67 @@ Visite ensuite http://127.0.0.1:8000
 - Rôles, postes et droits d'accès
 - Authentification via JWT
 
+## 🧭 Philosophie & Organisation du Projet
+
+### Principes utilisés
+
+- **Software Craftsmanship**  
+  Le projet respecte les bonnes pratiques de lisibilité, maintenabilité et modularité.  
+  Chaque domaine métier (adhérents, bénévoles, formations…) est implémenté comme une **app Django indépendante**, ce qui permet une meilleure isolation et testabilité.
+
+- **Test Driven Development (TDD)**  
+  Chaque nouvelle fonctionnalité est développée en commençant par les tests unitaires.  
+  Les tests se trouvent directement dans les apps (`apps/*/tests/`) pour rester proches du code, et des tests d’intégration sont regroupés dans `tests/`.
+
+- **Business Driven Development (BDD)**  
+  La logique métier est décrite sous forme de **scénarios lisibles** par les non-développeurs (fichiers `.feature`).  
+  Ces scénarios vivent dans `tests/features/` (globaux) ou dans chaque app (`apps/*/tests/features/`).  
+  Cela permet de vérifier que l’application répond aux besoins réels de l’association.
+
+- **MongoDB via Docker**  
+  La base de données est hébergée via un conteneur Docker, isolée du code.  
+  Des scripts d’initialisation (`docker/mongo-init.js`) permettent de préparer la base au premier démarrage.
+
+---
+
+### Organisation du répertoire
+
+``` less
+feinte-ours-api/
+├── apps/ # Applications Django (modules métier)
+│ ├── members/ # Gestion des adhérents
+│ │ ├── services/ # Logique métier
+│ │ ├── repositories/ # Accès MongoDB (ODM / requêtes)
+│ │ └── tests/ # Tests unitaires + scénarios BDD
+│ └── volunteers/ # Gestion des bénévoles
+│
+├── config/ # Paramétrage du projet Django
+│ ├── settings/ # Base, Dev, Prod
+│ └── urls.py, wsgi.py
+│
+├── tests/ # Tests globaux (intégration, end-to-end, BDD)
+│ ├── factories/ # Génération d’objets de test
+│ └── features/ # Scénarios BDD globaux
+│
+├── docker/ # Configuration Docker (API + MongoDB)
+│ ├── docker-compose.yml
+│ ├── Dockerfile
+│ └── mongo-init.js
+│
+├── requirements/ # Dépendances (base, dev, prod)
+├── scripts/ # Scripts utilitaires (reset DB, fixtures, etc.)
+├── manage.py
+└── .env
+```
+
+### Règles générales
+- **Une app = un domaine métier** → séparation claire.  
+- **`services/`** → logique métier indépendante des modèles.  
+- **`repositories/`** → interactions avec la base MongoDB.  
+- **Tests proches du code + répertoire global `tests/`** pour la cohérence TDD/BDD.  
+- **Config centralisée dans `config/`** → facile à déployer en dev, staging, prod.  
+
+
 ## 🤝 Contribuer
 
 Ce projet est en phase d’apprentissage. Les suggestions sont les bienvenues via Issues ou Pull Requests.
