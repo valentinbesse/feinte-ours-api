@@ -83,7 +83,7 @@ Visite ensuite http://127.0.0.1:8000
 
 ### Organisation du répertoire
 
-``` tree
+``` text
 feinte-ours-api/
 ├── apps/ # Applications Django (modules métier)
 │ ├── members/ # Gestion des adhérents
